@@ -19,17 +19,14 @@ services:
     volumes:
       - ./:/var/www
     depends_on:
-      - mysql
+      - mysqldb
     links:
-      - mysql
+      - mysqldb
 
-  mysql:
+  mysqldb:
     image: mariadb:10.4.15
-    hostname: "mysql"
+    hostname: "mysqldb"
     environment:
-      MYSQL_USER: root
-      MYSQL_PASSWORD: root
-      MYSQL_DATABASE: book24
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - mariadb:/var/lib/mysql

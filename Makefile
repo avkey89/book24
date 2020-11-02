@@ -1,4 +1,4 @@
-init: docker-down-clear docker-pull docker-build docker-up install db-migrate db-fixtures
+init: docker-down-clear docker-pull docker-build docker-up install db-create db-migrate db-fixtures
 up: docker-up
 down: docker-down
 restart: down up

@@ -1,7 +1,6 @@
 FROM php:7.4-fpm-alpine
 
-RUN apk add --no-cache autoconf g++ make \
-    && apk add mysql mysql-client mariadb-client
+RUN apk add --no-cache autoconf g++ make
 
 RUN docker-php-ext-install pdo_mysql
 
