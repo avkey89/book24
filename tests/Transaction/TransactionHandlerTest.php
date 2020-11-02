@@ -12,7 +12,7 @@ class TransactionHandlerTest extends KernelTestCase
     {
         self::bootKernel();
         $this->client = new \GuzzleHttp\Client([
-            'base_uri' => 'http://127.0.0.1:8000',
+            'base_uri' => 'http://nginx',
             'defaults' => [
                 'exceptions' => false
             ]

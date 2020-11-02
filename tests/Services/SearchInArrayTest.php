@@ -7,8 +7,14 @@ use PHPUnit\Framework\TestCase;
 
 class SearchInArrayTest extends TestCase
 {
+    public function tearDown(): void
+    {
+        parent::tearDown();
+    }
+
     public function testFindNumFalse()
     {
+        ini_set("memory_limit", "550M");
         $searchInArray = new SearchInArray();
         $result = $searchInArray->findNum(range(1, 10000000, 2), 6562848);
         $this->assertFalse($result);

@@ -2,6 +2,8 @@ FROM php:7.4-fpm-alpine
 
 RUN apk add --no-cache autoconf g++ make
 
+RUN apk add curl
+
 RUN docker-php-ext-install pdo_mysql
 
 WORKDIR /var/www

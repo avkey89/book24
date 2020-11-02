@@ -31,4 +31,4 @@ db-fixtures:
 	docker-compose exec -T php-fpm php bin/console doctrine:fixtures:load -n
 
 test:
-	docker-compose exec -T php-fpm php vendor/bin/phpunit
+	docker-compose exec -T php-fpm php vendor/phpunit/phpunit/phpunit
