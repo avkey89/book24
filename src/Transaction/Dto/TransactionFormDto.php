@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Transaction;
+namespace App\Transaction\Dto;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class Fields
+class TransactionFormDto
 {
     /**
      * @var string

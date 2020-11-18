@@ -19,57 +19,27 @@ class User
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private ?string $email;
+    private string $email;
 
     /**
      * @ORM\OneToOne(targetEntity=Balance::class, mappedBy="user", cascade={"persist", "remove"})
      */
-    private ?Balance $balance;
+    private Balance $balance;
 
-    public function __construct(string $name, string $email)
+    public function __construct(string $name, string $email, Balance $balance)
     {
         $this->name = $name;
         $this->email = $email;
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    public function getBalance(): ?Balance
-    {
-        return $this->balance;
-    }
-
-    public function setBalance(?Balance $balance): self
-    {
         $this->balance = $balance;
-
-        if ($balance->getBalance() !== $this) {
-            $balance->getBalance($this);
-        }
-
-        return $this;
     }
 }

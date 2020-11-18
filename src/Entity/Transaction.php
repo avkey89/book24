@@ -15,27 +15,27 @@ class Transaction
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private ?int $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private ?\DateTime $date;
+    private \DateTime $date;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private ?int $amount;
+    private int $amount;
 
     /**
      * @ORM\ManyToOne(targetEntity=Balance::class, inversedBy="debitTransaction")
      */
-    private ?Balance $debitBalance;
+    private Balance $debitBalance;
 
     /**
      * @ORM\ManyToOne(targetEntity=Balance::class, inversedBy="creditTransaction")
      */
-    private ?Balance $creditBalance;
+    private Balance $creditBalance;
 
     public function __construct(Balance $debitBalance, Balance $creditBalance, int $amount)
     {
@@ -44,68 +44,4 @@ class Transaction
         $this->amount = $amount;
         $this->date = new \DateTime("now");
     }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    public function getAmount(): ?int
-    {
-        return $this->amount;
-    }
-
-    public function setAmount(int $amount): self
-    {
-        $this->amount = $amount;
-
-        return $this;
-    }
-
-    /**
-     * @return Balance|null
-     */
-    public function getDebitBalance(): ?Balance
-    {
-        return $this->debitBalance;
-    }
-
-    /**
-     * @param Balance|null $debitBalance
-     */
-    public function setDebitBalance(?Balance $debitBalance): void
-    {
-        $this->debitBalance = $debitBalance;
-    }
-
-    /**
-     * @return Balance|null
-     */
-    public function getCreditBalance(): ?Balance
-    {
-        return $this->creditBalance;
-    }
-
-    /**
-     * @param Balance|null $creditBalance
-     */
-    public function setCreditBalance(?Balance $creditBalance): void
-    {
-        $this->creditBalance = $creditBalance;
-    }
-
-
-
 }
