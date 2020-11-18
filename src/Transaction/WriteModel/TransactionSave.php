@@ -23,9 +23,7 @@ class TransactionSave
 
     public function implementation($userFrom, $userTo, $amount)
     {
-        $userFromBalance = $this->userBalance->findByUser($userFrom);
-        $userToBalance = $this->userBalance->findByUser($userTo);
-        $transaction = new Transaction($userFromBalance, $userToBalance, $amount);
+        $transaction = new Transaction($userFrom, $userTo, $amount);
 
         $this->entityManager->beginTransaction();
         try {
