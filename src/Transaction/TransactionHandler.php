@@ -35,7 +35,7 @@ class TransactionHandler
         $userTo = $this->userFindByEmail->find($toUser);
 
         $balanceUserFrom = $this->userBalance->findByUser($userFrom);
-        $balanceUserTo = $this->userBalance->findByUser($userFrom);
+        $balanceUserTo = $this->userBalance->findByUser($userTo);
 
         $this->checkBalance->check($balanceUserFrom->getBalance(), $amount);
 
