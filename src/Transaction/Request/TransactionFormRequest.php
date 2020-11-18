@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Transaction\Request;
 
-use App\Transaction\Dto\TransactionFormDto;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class TransactionFormRequest
