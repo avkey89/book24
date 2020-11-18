@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Transaction\Dto\TransactionFormDto;
 use App\Transaction\Form\TransactionForm;
 use App\Transaction\Request\TransactionFormRequest;
 use App\Transaction\TransactionHandler;
