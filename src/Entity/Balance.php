@@ -51,4 +51,11 @@ class Balance
     {
         return $this->balance;
     }
+
+    public function setBalance(int $balance): self
+    {
+        $this->balance = $balance;
+
+        return $this;
+    }
 }

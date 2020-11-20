@@ -29,7 +29,7 @@ class TransactionHandler
         $this->userBalance = $userBalance;
     }
 
-    public function execution($fromUser, $toUser, $amount): JsonResponse
+    public function handler($fromUser, $toUser, $amount): JsonResponse
     {
         $userFrom = $this->userFindByEmail->find($fromUser);
         $userTo = $this->userFindByEmail->find($toUser);

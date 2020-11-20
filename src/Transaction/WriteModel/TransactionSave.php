@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Transaction\WriteModel;
 
 use App\Entity\Transaction;
-use App\Transaction\ReadModel\UserBalance;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,12 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 class TransactionSave
 {
     private EntityManagerInterface $entityManager;
-    private UserBalance $userBalance;
 
-    public function __construct(EntityManagerInterface $entityManager, UserBalance $userBalance)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->userBalance = $userBalance;
     }
 
     public function implementation($userFrom, $userTo, $amount)
@@ -27,6 +24,8 @@ class TransactionSave
 
         $this->entityManager->beginTransaction();
         try {
+            $userFrom->setBalance($userFrom->getBalance() - $amount);
+            $userTo->setBalance($userTo->getBalance() + $amount);
             $this->entityManager->persist($transaction);
             $this->entityManager->flush();
             $this->entityManager->commit();

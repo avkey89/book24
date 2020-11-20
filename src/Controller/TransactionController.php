@@ -25,7 +25,7 @@ class TransactionController extends AbstractController
             $form->submit($request->request->all());
 
             if ($form->isValid()) {
-                return $transactionHandler->execution($transactionRequest->from_user, $transactionRequest->to_user, $transactionRequest->amount);
+                return $transactionHandler->handler($transactionRequest->from_user, $transactionRequest->to_user, $transactionRequest->amount);
             } else {
                 return $this->json(["message" => (string)$form->getErrors(true, false)], Response::HTTP_BAD_REQUEST);
             }
