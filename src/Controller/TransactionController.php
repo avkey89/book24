@@ -17,7 +17,7 @@ class TransactionController extends AbstractController
     public function transaction(Request $request, TransactionCommandHandler $transactionCommandHandler): JsonResponse
     {
         try {
-            $this->handler($transactionCommandHandler, $request->request->all());
+            $transactionCommandHandler->handler($request->request->all());
 
             return new JsonResponse(["message" => "Transaction successfully created"], Response::HTTP_CREATED);
         } catch (\Exception $e) {
