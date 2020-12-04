@@ -2,10 +2,7 @@
 
 namespace App\Controller;
 
-use App\Transaction\Form\TransactionForm;
-use App\Transaction\Request\TransactionFormRequest;
-use App\Transaction\TransactionHandler;
-
+use App\Services\Command\Transaction\TransactionCommandHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,20 +14,14 @@ class TransactionController extends AbstractController
     /**
      * @Route("/transaction", methods={"POST"}, name="transaction")
      */
-    public function transaction(Request $request, TransactionHandler $transactionHandler): JsonResponse
+    public function transaction(Request $request, TransactionCommandHandler $transactionCommandHandler): JsonResponse
     {
         try {
-            $transactionRequest = new TransactionFormRequest();
-            $form = $this->createForm(TransactionForm::class, $transactionRequest);
-            $form->submit($request->request->all());
+            $this->handler($transactionCommandHandler, $request->request->all());
 
-            if ($form->isValid()) {
-                return $transactionHandler->handler($transactionRequest->from_user, $transactionRequest->to_user, $transactionRequest->amount);
-            } else {
-                return $this->json(["message" => (string)$form->getErrors(true, false)], Response::HTTP_BAD_REQUEST);
-            }
+            return new JsonResponse(["message" => "Transaction successfully created"], Response::HTTP_CREATED);
         } catch (\Exception $e) {
-            return $this->json(["message" => $e->getMessage()], $e->getCode());
+            return $this->json(["success"=>false, "message" => $e->getMessage()], $e->getCode());
         }
     }
 }

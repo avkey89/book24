@@ -2,7 +2,7 @@
 
 namespace App\Tests\Transaction;
 
-use App\Transaction\TransactionHandler;
+use App\Services\Command\Transaction\TransactionCommandHandler;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class TransactionHandlerTest extends KernelTestCase
@@ -28,23 +28,27 @@ class TransactionHandlerTest extends KernelTestCase
         parent::tearDown();
     }
 
-    public function testHandlerSuccess()
+    public function testTransactionHandlerSuccess()
     {
+        /** @var TransactionCommandHandler $transaction */
         $transaction = self::$container
-            ->get(TransactionHandler::class);
+            ->get(TransactionCommandHandler::class);
 
-        $transaction->handler("useremail1@test.ru", "useremail2@test.ru", 50);
+        $response = $transaction->handler(["from_user"=>"useremail1@test.ru", "to_user"=>"useremail2@test.ru", "amount"=>50]);
 
         $this->assertJson("{\"message\": \"Transaction successfully created\"}");
+        $this->assertTrue($response);
     }
 
-    public function testHandlerFalse()
+    public function testTransactionHandlerFalse()
     {
+        /** @var TransactionCommandHandler $transaction */
         $transaction = self::$container
-            ->get(TransactionHandler::class);
+            ->get(TransactionCommandHandler::class);
 
         $this->expectException(\DomainException::class);
+        $this->expectExceptionCode(400);
 
-        $transaction->handler("useremail1@test.ru", "useremail2@test.ru", 80000000);
+        $transaction->handler(["from_user"=>"useremail1@test.ru", "to_user"=>"useremail2@test.ru", "amount"=>50000000000000]);
     }
 }

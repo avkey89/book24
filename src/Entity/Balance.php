@@ -47,15 +47,23 @@ class Balance
         $this->creditTransaction = new ArrayCollection();
     }
 
+    public static function negativeBalanceCheck(int $currentBalanceFrom, int $transactionAmount)
+    {
+        return $currentBalanceFrom >= $transactionAmount;
+    }
+
     public function getBalance(): int
     {
         return $this->balance;
     }
 
-    public function setBalance(int $balance): self
+    public function plusBalance(int $amount)
     {
-        $this->balance = $balance;
+        $this->balance = $this->getBalance() + $amount;
+    }
 
-        return $this;
+    public function minusBalance(int $amount)
+    {
+        $this->balance = $this->getBalance() - $amount;
     }
 }

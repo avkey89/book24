@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Transaction\Form;
+namespace App\Services\Command\Transaction\Form;
 
-use App\Transaction\Request\TransactionFormRequest;
+use App\Services\Command\Transaction\TransactionCommand;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -25,7 +25,7 @@ class TransactionForm extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => TransactionFormRequest::class
+                'data_class' => TransactionCommand::class
             ]
         );
     }

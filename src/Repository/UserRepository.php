@@ -22,11 +22,7 @@ class UserRepository extends ServiceEntityRepository
 
     public function findByEmail(string $email)
     {
-        if (!$user = $this->findOneBy(["email" => $email])) {
-            throw new \DomainException("User '" . $email . "' not found.", Response::HTTP_NOT_FOUND);
-        }
-
-        return $user;
+        return $this->findOneBy(["email" => $email]);
     }
 
     // /**

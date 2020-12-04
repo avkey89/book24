@@ -65,8 +65,7 @@ ORDER BY b.date ASC
 LIMIT ?, 100
 
 // indexes
-create index if not exists books_status_index on books (status);
-create index if not exists books_date_index on books (date);
+create index if not exists books_status_date_index on books (status_date);
 ```
 
 ## Задание 4. 
@@ -98,13 +97,9 @@ create index if not exists books_date_index on books (date);
 ### Работа
 При запуске проекта через команду `make init` автоматически создаются 10 тестовых пользователей с e-mail (`useremail0@test.ru`, `useremail1@test.ru` и т.д. до `useremail9@test.ru`) и балансом равным 1000 для каждого пользователя.
  
-Для выполнения запроса на перевод баланса, необходимо осуществить `POST` запрос по адресу `http://localhost:8000/transaction` с телом запроса
-```json
-{
-    "from_user": "useremail0@test.ru",
-    "to_user": "useremail1@test.ru",
-    "amount": 100
-}
+Для выполнения запроса на перевод баланса, необходимо осуществить `POST` запрос по адресу `http://localhost:8000/transaction` с параметрами запроса
+```
+from_user=useremail0@test.ru&to_user=useremail1@test.ru&amount=100
 ```
 где:
 

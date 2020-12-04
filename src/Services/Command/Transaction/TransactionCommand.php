@@ -2,30 +2,28 @@
 
 declare(strict_types=1);
 
-namespace App\Transaction\Request;
+namespace App\Services\Command\Transaction;
 
+use App\Services\Command\CommandInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class TransactionFormRequest
+class TransactionCommand implements CommandInterface
 {
     /**
-     * @var string
-     * @Assert\NotBlank(message="11")
+     * @Assert\NotBlank()
      * @Assert\Email()
      */
     public string $from_user;
 
     /**
-     * @var string
-     * @Assert\NotBlank(message="22")
+     * @Assert\NotBlank()
      * @Assert\Email()
      */
     public string $to_user;
 
     /**
-     * @var int
-     * @Assert\NotBlank(message="333")
-     * @Assert\Type("integer", message="444")
+     * @Assert\NotBlank()
+     * @Assert\Type("integer")
      * @Assert\Range(
      *     min = 0,
      *     minMessage="Negative translations are prohibited"
