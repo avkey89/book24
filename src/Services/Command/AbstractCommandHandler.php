@@ -13,7 +13,6 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
 
     public function __construct(FormFactoryInterface $formFactory)
     {
-
         $this->formFactory = $formFactory;
     }
 
@@ -27,7 +26,7 @@ abstract class AbstractCommandHandler implements CommandHandlerInterface
         } else {
             $errors = '';
             foreach($form->getErrors(true) as $error) {
-                $errors .= $error->current()->getMessage() . "\n";
+                $errors .= $error->getMessage() . "\n";
             }
             throw new \DomainException($errors, Response::HTTP_BAD_REQUEST);
         }
